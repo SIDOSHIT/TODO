@@ -1,11 +1,22 @@
-/* "use strict" - Директива выглядит как строка: "use strict" или 'use strict'. 
-Когда она находится в начале скрипта, весь сценарий работает в «современном» режиме. */
-let str = 'abc';
-str[0] = 'd';
+const root = document.getElementById("root");
 
-console.log(str)
+function createElement(tag, content, className, parent, position) {
+    const el = document.createElement(tag)
+    el.innerText = content;
+    el.classList.add(className);
+    parent.insertAdjacentElement(position, el);
+    return el;
+};
+const input = createElement("input", "", "input", root, "afterbegin");
+const btn = createElement("button", "Add", "btn", root, "beforeend");
+const ul = createElement("ul", "", "ul", root, "beforeend")
+const todo = new Array(30);
 
-let arr = [1, 2, 3, 4, 5];
-arr[10] = 6;
-
-console.log(arr.length)
+btn.onclick = () => {
+    todo.push(input.value);
+    ul.innerHTML = "";
+    input.value = "";
+    todo.map((item) => {
+        createElement("li", item, 'li', ul, "beforeend")
+    });
+};
