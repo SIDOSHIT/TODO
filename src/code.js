@@ -19,50 +19,43 @@ ol.setAttribute("type", "a");
 let todo = [];
 let delete_btns = [];
 
-window.onload= () =>{
-  todo = JSON.parse(localStorage.getItem('todo'))
-  if(todo){
-    drawTodos(todo, ol, delete_btns)
-  }
+window.onload = () => {
+    if (localStorage.getItem("todo")) {
+        todo = JSON.parse(localStorage.getItem('todo'))
+    }
+    if (todo) {
+        drawTodos(todo, ol, delete_btns)
+    }
 }
 
 btn.onclick = () => {
-  addTodo();
+    addTodo();
 };
 
 input.onkeydown = (e) => {
-  if (e.code == "Enter") {
-    addTodo();
-  }
+    if (e.code == "Enter") {
+        addTodo();
+    }
 };
+
 let flag = false;
-toggle.onchange = () =>{
-if(!flag){
-  document.body.style.backgroundColor = "black";
-  flag = true
-  }else{
-    document.body.style.backgroundColor = "white";
-    flag = false;
-  }
+toggle.onchange = () => {
+    if (!flag) {
+        document.body.style.backgroundColor = "black";
+        flag = true
+    } else {
+        document.body.style.backgroundColor = "white";
+        flag = false;
+    }
 }
 
 function addTodo() {
-  if (input.value == "") {
-    return;
-  }
-  todo.push(input.value);
-  localStorage.setItem("todo", JSON.stringify(todo))
-  ol.innerHTML = "";
-  input.value = "";
-  drawTodos(todo,ol, delete_btns);
+    if (input.value == "") {
+        return;
+    }
+    todo.push(input.value);
+    localStorage.setItem("todo", JSON.stringify(todo))
+    ol.innerHTML = "";
+    input.value = "";
+    drawTodos(todo, ol, delete_btns);
 }
-
-
-// оформить наш интерфейс
-// input уменьшить
-// посередке
-// кнопку справа
-// li добавить border
-// добавление дела на нажатие Enter
-// удаление li ( добавить для этого кнопку к li)
-// редактирование дела
